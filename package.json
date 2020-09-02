@@ -1,7 +1,7 @@
 {
-  "name": "boilerplate-card",
+  "name": "@kibibit/kb-steam-card",
   "version": "1.1.9",
-  "description": "Lovelace boilerplate-card",
+  "description": "Lovelace Steam Card",
   "keywords": [
     "home-assistant",
     "homeassistant",
@@ -10,28 +10,44 @@
     "lovelace",
     "custom-cards"
   ],
-  "module": "boilerplate-card.js",
-  "repository": "git@github.com:custom_cards/boilerplate-card.git",
-  "author": "Ian Richardson <iantrich@gmail.com>",
+  "module": "kb-steam-card.js",
+  "repository": "git@github.com:kibibit/kb-steam-card.git",
+  "author": "thatkookooguy <neilkalman@gmail.com>",
   "license": "MIT",
   "dependencies": {
     "custom-card-helpers": "^1.6.3",
     "home-assistant-js-websocket": "^4.4.0",
     "lit-element": "^2.2.1",
-    "lit-html": "^1.1.2"
+    "lit-html": "^1.1.2",
+    "timeago": "^1.6.7",
+    "timeago.js": "^4.0.0-beta.3"
   },
   "devDependencies": {
     "@babel/core": "^7.6.4",
     "@babel/plugin-proposal-class-properties": "^7.5.5",
     "@babel/plugin-proposal-decorators": "^7.4.0",
+    "@commitlint/cli": "^9.1.2",
+    "@commitlint/config-conventional": "^9.1.2",
     "@rollup/plugin-json": "^4.0.0",
+    "@semantic-release/commit-analyzer": "^8.0.1",
+    "@semantic-release/exec": "^5.0.0",
+    "@semantic-release/git": "^9.0.0",
+    "@semantic-release/github": "^7.0.7",
+    "@semantic-release/release-notes-generator": "^9.0.1",
     "@typescript-eslint/eslint-plugin": "^2.6.0",
     "@typescript-eslint/parser": "^2.6.0",
+    "all-contributors-cli": "^6.17.2",
+    "commitizen": "^4.2.1",
+    "coveralls": "^3.1.0",
+    "cz-conventional-changelog": "^3.3.0",
     "eslint": "^6.6.0",
     "eslint-config-airbnb-base": "^14.0.0",
     "eslint-config-prettier": "^6.5.0",
     "eslint-plugin-import": "^2.18.2",
     "eslint-plugin-prettier": "^3.1.1",
+    "husky": "^4.2.5",
+    "jest": "^26.4.2",
+    "jest-stare": "^2.1.0",
     "prettier": "^1.19.1",
     "rollup": "^1.26.0",
     "rollup-plugin-babel": "^4.3.3",
@@ -41,12 +57,72 @@
     "rollup-plugin-terser": "^5.1.2",
     "rollup-plugin-typescript2": "^0.24.3",
     "rollup-plugin-uglify": "^6.0.3",
+    "semantic-release": "^17.1.1",
+    "semantic-release-cli": "^5.4.0",
+    "ts-jest": "^26.3.0",
+    "ts-node": "^9.0.0",
     "typescript": "^3.6.4"
   },
   "scripts": {
+    "contributors:add": "all-contributors add",
+    "contributors:generate": "all-contributors generate",
     "start": "rollup -c --watch",
     "build": "npm run lint && npm run rollup",
     "lint": "eslint src/*.ts",
-    "rollup": "rollup -c"
+    "rollup": "rollup -c",
+    "semantic-release": "semantic-release",
+    "commit": "npx git-cz"
+  },
+  "release": {
+    "branches": [
+      "master",
+      {
+        "name": "next",
+        "prerelease": true
+      }
+    ],
+    "npmPublish": true,
+    "analyzeCommits": [
+      "@semantic-release/commit-analyzer"
+    ],
+    "verifyConditions": [
+      "@semantic-release/git",
+      "@semantic-release/github"
+    ],
+    "prepare": [
+      {
+        "path": "@semantic-release/git",
+        "assets": [
+          "package.json"
+        ],
+        "message": "chore(release): ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}"
+      }
+    ],
+    "publish": [
+      "@semantic-release/github"
+    ],
+    "success": [
+      "@semantic-release/github",
+      [
+        "@semantic-release/exec",
+        {
+          "successCmd": "npm start -- --branch $TRAVIS_BRANCH"
+        }
+      ]
+    ],
+    "fail": [
+      "@semantic-release/github"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "prepare-commit-msg": "exec < /dev/tty && (npm run commit -- --hook) || true",
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS || (git config commit.template .commit-template && false)"
+    }
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
   }
 }
