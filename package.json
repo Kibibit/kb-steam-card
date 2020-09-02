@@ -11,6 +11,10 @@
     "custom-cards"
   ],
   "module": "kb-steam-card.js",
+  "files": [
+    "/dist",
+    "/screenshots"
+  ],
   "author": "thatkookooguy <neilkalman@gmail.com>",
   "license": "MIT",
   "dependencies": {
