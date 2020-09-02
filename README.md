@@ -68,6 +68,7 @@ type: 'custom:kb-steam-card'
 ```
 
 for multiple users, use the `entities` attribute:
+![](screenshots/multi.png)
 
 ```yaml
 entities:
@@ -78,6 +79,7 @@ type: 'custom:kb-steam-card'
 ```
 
 you can also show the game header image as background with `game_background: true`:
+![](screenshots/game-bg.png)
 
 ```yaml
 entities:
