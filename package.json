@@ -11,7 +11,6 @@
     "custom-cards"
   ],
   "module": "kb-steam-card.js",
-  "repository": "git@github.com:kibibit/kb-steam-card.git",
   "author": "thatkookooguy <neilkalman@gmail.com>",
   "license": "MIT",
   "dependencies": {
