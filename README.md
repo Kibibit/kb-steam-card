@@ -37,10 +37,9 @@
 You need at least one [steam integration]() to use with this card.
 
 ```yaml
-frontend:
-  ... # your configuration.
-  themes: !include_dir_merge_named themes
-  ... # your configuration.
+resources:
+  url: '<url-to-card.js>'
+  type: module
 ```
 
 ### HACS
