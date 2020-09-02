@@ -36,17 +36,58 @@
 
 You need at least one [steam integration]() to use with this card.
 
+### HACS (recommended)
+
+1. Go to the Community Store.
+2. Search for `steam card`.
+3. Press `Install`.
+
+### Manual Installation
+
 ```yaml
 resources:
   url: '<url-to-card.js>'
   type: module
 ```
 
-### HACS
+## Usage
 
-1. Go to the Community Store.
-2. Search for `steam card`.
-3. Press `Install`.
+for a single user card, use `entity`:
+
+```yaml
+entity: sensor.steam_<steam-id>
+type: 'custom:kb-steam-card'
+```
+
+you can change the username using the following:
+
+```yaml
+entity: sensor.steam_<steam-id>
+friendly_name: Myself
+type: 'custom:kb-steam-card'
+```
+
+for multiple users, use the `entities` attribute:
+
+```yaml
+entities:
+  - sensor.steam_<steam-id>
+  - sensor.steam_<steam-id>
+  - sensor.steam_<steam-id>
+type: 'custom:kb-steam-card'
+```
+
+you can also show the game header image as background with `game_background: true`:
+
+```yaml
+entities:
+  - sensor.steam_<steam-id>
+  - sensor.steam_<steam-id>
+  - sensor.steam_<steam-id>
+friendly_name: hello
+game_background: true
+type: 'custom:kb-steam-card'
+```
 
 ## Stay in touch
 

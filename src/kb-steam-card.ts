@@ -71,7 +71,12 @@ class KbSteamCard extends LitElement {
                   <img src="${entity.attributes.entity_picture}" class="kb-steam-avatar" />
                   <div class="kb-steam-username">${entity.attributes.friendly_name}</div>
                 </div>
-                <div class="kb-steam-value">-</div>
+                <div class="kb-steam-value">${entity.attributes.game || '-'}</div>
+                ${entity.attributes.game && this.config.game_background
+                  ? html`
+                      <img src="${entity.attributes.game_image_header}" class="kb-steam-game-bg" />
+                    `
+                  : ''}
               </div>
             `
           : html`
@@ -145,6 +150,26 @@ class KbSteamCard extends LitElement {
         width: 100%;
         padding-top: 8px;
         padding-bottom: 8px;
+      }
+
+      .kb-steam-value {
+        padding: 0 0.3em;
+      }
+
+      .kb-steam-value,
+      .kb-steam-user {
+        z-index: 2;
+      }
+
+      .kb-steam-game-bg {
+        z-index: 0;
+        position: absolute;
+        right: 0;
+        height: 170%;
+        width: auto;
+        opacity: 0.5;
+        mask-image: linear-gradient(to right, transparent 10%, black 90%);
+        -webkit-mask-image: linear-gradient(to right, transparent 10%, black 90%);
       }
 
       .not-found {
@@ -226,6 +251,7 @@ class KbSteamCard extends LitElement {
         justify-content: space-between;
         margin: 0 0 8px;
         position: relative;
+        overflow: hidden;
       }
 
       .kb-steam-multi .kb-steam-user {
@@ -248,6 +274,7 @@ class KbSteamCard extends LitElement {
         background: #646464;
         background-image: radial-gradient(top, #616161 0%, #616161 20%, #535353 60%);
         content: '';
+        z-index: 3;
       }
 
       .kb-steam-multi.online::before,
