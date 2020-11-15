@@ -11,7 +11,7 @@
     "custom-cards",
     "hassio"
   ],
-  "module": "kb-steam-card.js",
+  "module": "dist/kb-steam-card.js",
   "files": [
     "/dist",
     "/screenshots",
