@@ -2,14 +2,24 @@ import { LitElement, html, customElement, CSSResult, TemplateResult, css, Proper
 
 import * as packageDetails from '../package.json';
 
+declare global {
+  interface Window {
+    customCards: {
+      type: string;
+      name: string;
+      description: string;
+    }[];
+  }
+}
+
 console.info(
   `%c  KB-STEAM-CARD \n%c  ${packageDetails.version}   `,
   'color: orange; font-weight: bold; background: black',
   'color: white; font-weight: bold; background: dimgray',
 );
 
-(window as any).customCards = (window as any).customCards || [];
-(window as any).customCards.push({
+window.customCards = window.customCards || [];
+window.customCards.push({
   type: 'kb-steam-card',
   name: 'kb Steam Card',
   description: 'A card to show Steam integrations',
@@ -59,9 +69,7 @@ class KbSteamCard extends LitElement {
 
   createEntitiesCard(entities): TemplateResult[] {
     return [
-      html`
-        <div class="card-header"><div class="name">Steam Friends</div></div>
-      `,
+      html` <div class="card-header"><div class="name">Steam Friends</div></div> `,
       ...entities.map((ent, index) => {
         const entity = this.hass.states[ent];
         return entity
@@ -73,15 +81,11 @@ class KbSteamCard extends LitElement {
                 </div>
                 <div class="kb-steam-value">${entity.attributes.game || '-'}</div>
                 ${entity.attributes.game && this.config.game_background
-                  ? html`
-                      <img src="${entity.attributes.game_image_header}" class="kb-steam-game-bg" />
-                    `
+                  ? html` <img src="${entity.attributes.game_image_header}" class="kb-steam-game-bg" /> `
                   : ''}
               </div>
             `
-          : html`
-              <div class="not-found">Entity ${ent} not found.</div>
-            `;
+          : html` <div class="not-found">Entity ${ent} not found.</div> `;
       }),
     ];
   }
@@ -105,9 +109,7 @@ class KbSteamCard extends LitElement {
           <ha-icon icon="mdi:clock-outline"></ha-icon>
           ${entity.state === 'online' ? 'Online Since' : 'Last Online'}
         </span>
-        <span>
-          ${this.formatLastOnline(entity.attributes.last_online)}
-        </span>
+        <span> ${this.formatLastOnline(entity.attributes.last_online)} </span>
       </div>
       ${this.renderCurrentlyPlayingGame(entity)}
     `;
@@ -119,12 +121,8 @@ class KbSteamCard extends LitElement {
 
   renderUserAvatar(entity): TemplateResult {
     return entity.attributes.entity_picture
-      ? html`
-          <img src="${entity.attributes.entity_picture}" class="kb-steam-avatar" />
-        `
-      : html`
-          <ha-icon icon="${entity.attributes.icon}" class="kb-steam-avatar"></ha-icon>
-        `;
+      ? html` <img src="${entity.attributes.entity_picture}" class="kb-steam-avatar" /> `
+      : html` <ha-icon icon="${entity.attributes.icon}" class="kb-steam-avatar"></ha-icon> `;
   }
 
   renderCurrentlyPlayingGame(entity): TemplateResult {

@@ -1,0 +1,6 @@
+coverage
+test-results
+node_modules
+*.config.js
+examples
+.eslintrc.js

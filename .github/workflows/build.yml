@@ -4,9 +4,11 @@ on:
   push:
     branches: 
       - master
+      - next
   pull_request:
     branches: 
       - master
+      - next
 
 jobs:
   build:
@@ -17,4 +19,4 @@ jobs:
       - name: Build
         run: |
           npm install
-          npm run build
+          npm build
