@@ -1,5 +1,5 @@
 <p align="center">
-  <a href="https://github.com/Kibibit/kb-steam-card/" target="blank"><img src="screenshots/logo.png" width="500" alt="achievibit Logo" />
+  <a href="https://github.com/Kibibit/kb-steam-card/" target="blank"><img src="https://thatkookooguy.github.io/https-assets/screenshots/kb-steam-card-logo.png" width="500" alt="achievibit Logo" />
   </a>
   <h2 align="center">
     @kibibit/hass-kibibit-theme
@@ -20,15 +20,15 @@
 
 ### away \ offline state
 
-![away \ offline state](screenshots/offline.jpeg)
+![away \ offline state](https://thatkookooguy.github.io/https-assets/screenshots/kb-steam-card-offline.jpeg)
 
 ### online state
 
-![online state](screenshots/online.jpeg)
+![online state](https://thatkookooguy.github.io/https-assets/screenshots/kb-steam-card-online.jpeg)
 
 ### while playing a game
 
-![now playing](screenshots/now-playing.jpeg)
+![now playing](https://thatkookooguy.github.io/https-assets/screenshots/kb-steam-card-now-playing.jpeg)
 
 ## Installation
 
