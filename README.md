@@ -33,8 +33,7 @@
 ## Installation
 
 ### Prerequisites
-
-You need at least one [steam integration]() to use with this card.
+You need at least one [steam integration](https://www.home-assistant.io/integrations/steam_online/) to use with this card.
 
 ### HACS (recommended)
 
