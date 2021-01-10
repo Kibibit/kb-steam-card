@@ -85,7 +85,7 @@ class KbSteamCard extends LitElement {
 
       entities.forEach((entity: string) => {
         const entityObj = this.hass.states[entity];
-        if (entityObj && entityObj.state && entityObj.state === 'online') {
+        if (entityObj && entityObj.state && entityObj.state !== 'offline') {
           newEntities.push(entity);
         }
       });
