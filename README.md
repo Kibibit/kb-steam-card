@@ -80,6 +80,21 @@ entities:
 type: 'custom:kb-steam-card'
 ```
 
+you can also use a prefix selector to select all steam sensors:
+
+```yaml
+type: 'custom:kb-steam-card'
+entities: sensor.steam_
+```
+
+to show only **online users**, add the `online_only` attribute:
+
+```yaml
+type: 'custom:kb-steam-card'
+entities: sensor.steam_
+online_only: true
+```
+
 you can also show the game header image as background with `game_background: true`:
 ![](screenshots/game-bg.png)
 
