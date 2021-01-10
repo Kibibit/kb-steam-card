@@ -1,13 +1,16 @@
 <p align="center">
-  <a href="https://github.com/Kibibit/kb-steam-card/" target="blank"><img src="screenshots/logo.png" width="500" alt="achievibit Logo" />
+  <a href="https://github.com/Kibibit/kb-steam-card/" target="blank"><img src="https://thatkookooguy.github.io/https-assets/screenshots/kb-steam-card-logo.png" width="500" alt="achievibit Logo" />
   </a>
   <h2 align="center">
     @kibibit/hass-kibibit-theme
   </h2>
 </p>
 <p align="center">
-  <a href="https://github.com/custom-components/hacs"><img src="https://img.shields.io/badge/HACS-Default-orange.svg?style=for-the-badge"></a>
-  <a href="https://imgur.com/gallery/SQJNbWb"><img src="https://img.shields.io/badge/Screenshots-Click_Here-ff3860.svg?style=for-the-badge"></a>
+  <a href="https://www.npmjs.com/package/@kibibit/kb-steam-card"><img src="https://img.shields.io/npm/v/@kibibit/kb-steam-card/latest.svg?style=for-the-badge&logo=npm&color=CB3837"></a>
+</p>
+<p align="center">
+  <a href="https://github.com/custom-components/hacs"><img src="https://img.shields.io/badge/HACS-Default-orange.svg"></a>
+  <a href="https://imgur.com/gallery/SQJNbWb"><img src="https://img.shields.io/badge/Screenshots-Click_Here-ff3860.svg"></a>
 </p>
 <p align="center">
   A Home Assistant card for Steam integrations
@@ -20,15 +23,15 @@
 
 ### away \ offline state
 
-![away \ offline state](screenshots/offline.jpeg)
+![away \ offline state](https://thatkookooguy.github.io/https-assets/screenshots/kb-steam-card-offline.jpeg)
 
 ### online state
 
-![online state](screenshots/online.jpeg)
+![online state](https://thatkookooguy.github.io/https-assets/screenshots/kb-steam-card-online.jpeg)
 
 ### while playing a game
 
-![now playing](screenshots/now-playing.jpeg)
+![now playing](https://thatkookooguy.github.io/https-assets/screenshots/kb-steam-card-now-playing.jpeg)
 
 ## Installation
 

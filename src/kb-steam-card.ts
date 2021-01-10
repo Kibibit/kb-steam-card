@@ -68,13 +68,41 @@ class KbSteamCard extends LitElement {
   }
 
   createEntitiesCard(entities): TemplateResult[] {
+    if (typeof entities === 'string') {
+      const newEntities = [] as string[];
+
+      Object.values(this.hass.states).forEach((entity: any) => {
+        if (entity.entity_id.startsWith(entities)) {
+          newEntities.push(entity.entity_id);
+        }
+      });
+
+      entities = newEntities;
+    }
+
+    if (this.config.online_only) {
+      const newEntities = [] as string[];
+
+      entities.forEach((entity: string) => {
+        const entityObj = this.hass.states[entity];
+        if (entityObj && entityObj.state && entityObj.state === 'online') {
+          newEntities.push(entity);
+        }
+      });
+
+      entities = newEntities;
+    }
+
     return [
       html` <div class="card-header"><div class="name">Steam Friends</div></div> `,
       ...entities.map((ent, index) => {
         const entity = this.hass.states[ent];
         return entity
           ? html`
-              <div class="kb-steam-multi ${index === entities.length - 1 ? 'kb-last' : ''} ${entity.state}">
+              <div
+                class="kb-steam-multi kb-clickable ${index === entities.length - 1 ? 'kb-last' : ''} ${entity.state}"
+                @click=${() => this.handlePopup(entity)}
+              >
                 <div class="kb-steam-user">
                   <img src="${entity.attributes.entity_picture}" class="kb-steam-avatar" />
                   <div class="kb-steam-username">${entity.attributes.friendly_name}</div>
@@ -90,28 +118,36 @@ class KbSteamCard extends LitElement {
     ];
   }
 
+  handlePopup(entity) {
+    const entityId = entity.entity_id;
+    const e = new Event('hass-more-info', { composed: true }) as any;
+    e.detail = { entityId };
+    this.dispatchEvent(e);
+  }
+
   createEntityCard(entity): TemplateResult {
-    console.log(entity);
     return html`
-      <div class="kb-steam-username">
-        ${this.config.friendly_name ? this.config.friendly_name : entity.attributes.friendly_name}
+      <div class="kb-container kb-clickable" @click=${() => this.handlePopup(entity)}>
+        <div class="kb-steam-username">
+          ${this.config.friendly_name ? this.config.friendly_name : entity.attributes.friendly_name}
+        </div>
+        ${this.renderUserAvatar(entity)}
+        <div class="kb-steam-online-status">${entity.state}</div>
+        <div class="kb-steam-level">
+          <span class="kb-steam-level-text-container">
+            <span class="kb-steam-level-text">${entity.attributes.level}</span>
+          </span>
+          <ha-icon icon="mdi:shield"></ha-icon>
+        </div>
+        <div class="kb-steam-last-online">
+          <span>
+            <ha-icon icon="mdi:clock-outline"></ha-icon>
+            ${entity.state === 'online' ? 'Online Since' : 'Last Online'}
+          </span>
+          <span> ${this.formatLastOnline(entity.attributes.last_online)} </span>
+        </div>
+        ${this.renderCurrentlyPlayingGame(entity)}
       </div>
-      ${this.renderUserAvatar(entity)}
-      <div class="kb-steam-online-status">${entity.state}</div>
-      <div class="kb-steam-level">
-        <span class="kb-steam-level-text-container">
-          <span class="kb-steam-level-text">${entity.attributes.level}</span>
-        </span>
-        <ha-icon icon="mdi:shield"></ha-icon>
-      </div>
-      <div class="kb-steam-last-online">
-        <span>
-          <ha-icon icon="mdi:clock-outline"></ha-icon>
-          ${entity.state === 'online' ? 'Online Since' : 'Last Online'}
-        </span>
-        <span> ${this.formatLastOnline(entity.attributes.last_online)} </span>
-      </div>
-      ${this.renderCurrentlyPlayingGame(entity)}
     `;
   }
 
@@ -150,6 +186,10 @@ class KbSteamCard extends LitElement {
         padding-bottom: 8px;
       }
 
+      .kb-clickable {
+        cursor: pointer;
+      }
+
       .kb-steam-value {
         padding: 0 0.3em;
       }
@@ -177,11 +217,16 @@ class KbSteamCard extends LitElement {
         padding: 8px;
       }
 
-      ha-card {
+      ha-card,
+      ha-card > .kb-container {
         padding: 16px;
         display: flex;
         flex-direction: column;
         align-items: center;
+      }
+
+      .kb-container {
+        width: 100%;
       }
 
       .kb-steam-avatar {
