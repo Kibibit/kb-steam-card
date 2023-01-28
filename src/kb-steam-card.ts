@@ -93,8 +93,10 @@ class KbSteamCard extends LitElement {
       entities = newEntities;
     }
 
+    const cardTitle = (this.config.title ??= 'Steam Friends');
+
     return [
-      html` <div class="card-header"><div class="name">Steam Friends</div></div> `,
+      html` <div class="card-header"><div class="name">${cardTitle}</div></div> `,
       ...entities.map((ent, index) => {
         const entity = this.hass.states[ent];
         return entity

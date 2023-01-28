@@ -108,6 +108,14 @@ game_background: true
 type: 'custom:kb-steam-card'
 ```
 
+to adjust the card title you can use the `title` attribute:
+
+```yaml
+type: 'custom:kb-steam-card'
+entities: sensor.steam_
+title: Steam Friends
+```
+
 ## Stay in touch
 
 - Author - [Neil Kalman](https://github.com/thatkookooguy)
